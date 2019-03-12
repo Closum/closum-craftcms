@@ -43,6 +43,8 @@ class Settings extends Model
     public $apiPw = 'Closum Api Password';
     public $endpoint = 'https://api.closum.com/api';
     public $tokenEndpoint = 'https://api.closum.com/api/token';
+    public $emailNotification;
+    public $emailToNotify;
 
     // Public Methods
     // =========================================================================

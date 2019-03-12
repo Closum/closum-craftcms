@@ -11,6 +11,7 @@
 namespace closum\closumconnector\controllers;
 
 use closum\closumconnector\ClosumConnector;
+use craft\mail\Message;
 
 use Craft;
 use craft\web\Controller;
@@ -94,13 +95,27 @@ class LeadController extends Controller
             $lead = ClosumConnector::$plugin->lead->submit($lead_data);
 
             $response = [
-                'status' => 0,
-                'message' => 'Verifique os dados inseridos.'
+                  'status' => 0,
+                  'message' => 'Verifique os dados inseridos.'
             ];
 
             if($lead->success){
                   $response['status'] = 1;
                   $response['message'] = 'O seu pedido foi enviado com sucesso!';
+
+                  //lets send email
+                  if(ClosumConnector::getInstance()->getSettings()->emailNotification){
+
+                        $variables = [
+                              'name' =>  $request->getBodyParam('name'),
+                              'email' => $request->getBodyParam('email'),
+                              'telemovel' => $request->getBodyParam('phone-number'),
+                              'mensagem' => $request->getBodyParam('custom-data'),
+                              'closum_url' => 'https://www.closum.com/lead/view/'.$lead->data->id,
+                        ];
+
+                        $this->sendMail($variables, 'Nova mensagem através do website - Closum');
+                  }
             }
 
             return json_encode($response);
@@ -125,5 +140,41 @@ class LeadController extends Controller
 
             return json_encode($cities->data);
 
+      }
+
+      /**
+      * @param $html
+      * @param $subject
+      * @param null $mail
+      * @param array $attachments
+      * @return bool
+      */
+      private function sendMail($variables, $subject, $mail = null, array $attachments = array()): bool
+      {
+            $email_to = ClosumConnector::getInstance()->getSettings()->emailToNotify;
+            $message = new Message();
+
+            //lets load html
+            $view = Craft::$app->getView();
+            $oldTemplatesPath = $view->getTemplatesPath();
+            $view->setTemplatesPath(ClosumConnector::getInstance()->getBasePath());
+            $html = $view->renderTemplate('/templates/_mail/default.html', $variables);
+
+            $message->setFrom([$email_to => $email_to]);
+            $message->setTo($email_to);
+            $message->setSubject($subject);
+            $message->setHtmlBody($html);
+            if (!empty($attachments) && \is_array($attachments)) {
+
+                  foreach ($attachments as $fileId) {
+                        if ($file = Craft::$app->assets->getAssetById((int)$fileId)) {
+                              $message->attach($this->getFolderPath() . '/' . $file->filename, array(
+                                    'fileName' => $file->title . '.' . $file->getExtension()
+                              ));
+                        }
+                  }
+            }
+
+            return Craft::$app->mailer->send($message);
       }
 }

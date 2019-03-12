@@ -24,20 +24,31 @@ To install the plugin, follow these instructions.
 
 ## Closum Connector Overview
 
--Insert text here-
+This plugin is used to integrate the contact form of your website with your account from Closum.com.
+It follows Closum rest api documentation as it follows: https://developers.closum.com/
 
 ## Configuring Closum Connector
 
--Insert text here-
+You are required to insert both `api_username` and `api_pw` in order to connect with your Closum account.
+If you wish to be notified when you recieve a new contact you should enable `Send Email Notification` and fill `Email to be Notified`
 
 ## Using Closum Connector
 
--Insert text here-
+After installing you will have two endpoints available.
+
+1. To retrieve cities to populate your cities dropdown:
+
+        http://yourwebsite.tld/actions/closum-connector/lead/get-cities
+
+2. Then to post your form data via ajax or post:
+
+         http://yourwebsite.tld/actions/closum-connector/lead/submit-lead
+
 
 ## Closum Connector Roadmap
 
-Some things to do, and ideas for potential features:
+Todo, and ideas for potential features:
 
-* Release it
+* Create a base form as template
 
 Brought to you by [popperz0r](https://twitter.com/popperz0r)
