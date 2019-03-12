@@ -1,0 +1,45 @@
+{
+    "name": "closum/closum-connector",
+    "description": "Connects contact form with Closum to save contacts.",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "closum connector"
+    ],
+    "support": {
+        "docs": "https://github.com/popperz0r/closum-connector/blob/master/README.md",
+        "issues": "https://github.com/popperz0r/closum-connector/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "popperz0r",
+            "homepage": "https://twitter.com/popperz0r"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+          "closum\\closumconnector\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Closum Connector",
+        "handle": "closum-connector",
+        "hasCpSettings": true,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/popperz0r/closum-connector/master/CHANGELOG.md",
+        "components": {
+            "lead": "closum\\closumconnector\\services\\Lead",
+            "cities": "closum\\closumconnector\\services\\Cities",
+            "token": "closum\\closumconnector\\services\\Token"
+        },
+        "class": "closum\\closumconnector\\ClosumConnector"
+    }
+}

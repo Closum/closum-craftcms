@@ -1,0 +1,43 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Closum Connector plugin for Craft CMS 3.x
+ *
+ * Closum Connector Settings.twig
+ *
+ * @author    popperz0r
+ * @copyright Copyright (c) 2019 popperz0r
+ * @link      https://twitter.com/popperz0r
+ * @package   ClosumConnector
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("closum\\closumconnector\\assetbundles\\closumconnector\\ClosumConnectorAsset") %}
+
+{{ forms.textField({
+    label: 'Api Username',
+    id: 'api_username',
+    name: 'apiUsername',
+    value: settings['apiUsername']})
+}}
+{{ forms.textField({
+    label: 'Api Password',
+    id: 'api_pw',
+    name: 'apiPw',
+    value: settings['apiPw']})
+}}
+{{ forms.textField({
+    label: 'Endpoint',
+    id: 'endpoint',
+    name: 'endpoint',
+    value: settings['endpoint']})
+}}
+{{ forms.textField({
+    label: 'Token Endpoint',
+    id: 'token_endpoint',
+    name: 'tokenEndpoint',
+    value: settings['tokenEndpoint']})
+}}
