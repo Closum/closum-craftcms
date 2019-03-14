@@ -130,7 +130,7 @@ class LeadController extends Controller
       public function actionGetCities()
       {
 
-            if(!isset($_SESSION) || strtotime(date(DATE_ATOM)) >= strtotime($_SESSION['closum_token']->expiration_date)){
+            if(!isset($_SESSION['closum_token']) || strtotime(date(DATE_ATOM)) >= strtotime($_SESSION['closum_token']->expiration_date)){
                   $getToken = ClosumConnector::$plugin->token->getToken();
 
                   Craft::$app->getSession()->set('closum_token', $getToken->data);
