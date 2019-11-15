@@ -7,3 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## 1.0.0 - 2019-03-13
 ### Added
 - Initial release
+
+## 1.0.1 - 2019-11-15
+### Added
+- Now City ID is conditional and Custom Data Acepts either a String or Array
