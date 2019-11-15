@@ -79,8 +79,8 @@ class LeadController extends Controller
             //lets format lead data
             $lead_data = [
                   "name" => $request->getBodyParam('name'),
-                  "city_id" => $request->getBodyParam('city_id'),
-                  "custom_data" => json_encode(['Mensagem' => $request->getBodyParam('custom-data')], JSON_UNESCAPED_UNICODE),
+                  $request->getBodyParam('city_id')? ["city_id" => $request->getBodyParam('city_id')] : [],
+                  "custom_data" => json_encode([$request->getBodyParam('custom-data')], JSON_UNESCAPED_UNICODE),
                   "email" => ["email" => $request->getBodyParam('email')],
                   "phone" => ["extension" => "00351", "number" => $request->getBodyParam('phone-number')],
                   "lead_opt_in" => ["sms" => $request->getBodyParam('consent_sms')?: 0, "email" => $request->getBodyParam('consent_email')?: 0, "enviroment" => $enviroment_params]
