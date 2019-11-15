@@ -2,7 +2,7 @@
     "name": "closum/closum-connector",
     "description": "Connects contact form with Closum to save contacts.",
     "type": "craft-plugin",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "keywords": [
         "craft",
         "cms",
